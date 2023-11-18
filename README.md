@@ -2,6 +2,12 @@
 ## 1. Links
 - [Docker Hub - Frontend](https://hub.docker.com/repository/docker/guesung/contacts-frontend/general)
 - [Docker Hub - Backend](https://hub.docker.com/repository/docker/guesung/contacts-backend/general)  
+- [Github](https://github.com/guesung/docker-practice)
+
+## 2. Explanation
+
+Explanation
+This Docker practice project involves setting up a contacts application, which is split into three main components: the frontend, the backend, and the database. Each of these components is containerized using Docker, a platform that allows you to package applications into containers—standardized executable components combining application source code with the operating system (OS) libraries and dependencies required to run that code in any environment.
 
 ## 2. Pre-requisites
 1. docker cli
