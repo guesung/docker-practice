@@ -1,46 +1,33 @@
 version: '3.8'
 services:
-  mysql_srv:
-    image: mysql:8.0
-    container_name: mysql_ctr
-    restart: always
+  mydatabase:
+    image: mysql
+    container_name: mydatabase
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_DATABASE: contacts
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: '123456'
+      MYSQL_DATABASE: 'contacts-mysql'
+      MYSQL_USER: 'contacts-mysql'
+      MYSQL_PASSWORD: '123456'
     ports:
-      - "3307:3306"
-    volumes:
-      - ./data:/var/lib/mysql
-      - ./conf:/etc/mysql/conf.d
-      - ./logs:/logs
+      - '33306:3306'
 
-  phpmyadmin_srv:
-    depends_on:
-      - mysql_srv
-    image: phpmyadmin/phpmyadmin
-    container_name: phpadmin_ctr
-    restart: always
-    environment:
-      PMA_HOST: mysql_srv
-    ports:
-      - 8080:80
-
-  backend_srv:
+  mybackend:
     build: 
       context: ./api
     depends_on:
-      - mysql_srv
+      - mydatabase
     environment:
-      MYSQL_HOST_IP: mysql_srv
+      MYSQL_HOST_IP: mydatabase
       MYSQL_USER: root
-      MYSQL_DATABASE: contacts
-      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: contacts-mysql
+      MYSQL_PASSWORD: 123456
     ports:
       - 5000:5000
     volumes:
       - ./api:/api
 
-  frontend_srv:
+  myfrontend:
     build: 
       context: ./web
     ports:

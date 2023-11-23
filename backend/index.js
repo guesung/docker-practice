@@ -6,11 +6,12 @@ const cors = require("cors");
 require("dotenv").config();
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: process.env.DB_PASSWORD,
-  database: "mysql",
+  host: "mydatabase",
+  user: "contacts-mysql",
+  password: "123456",
+  database: "contacts-mysql",
 });
+
 
 db.connect((err) => {
   if (err) {
@@ -20,7 +21,6 @@ db.connect((err) => {
     console.log("Creating database table");
     let tableName = "contact_db";
 
-    // Query to create table
     let query = `CREATE TABLE ${tableName} 
         (id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, contact VARCHAR(255) NOT NULL
